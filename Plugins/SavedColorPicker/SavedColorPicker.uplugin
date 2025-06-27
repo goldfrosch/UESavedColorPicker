@@ -1,0 +1,30 @@
+﻿{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "SavedColorPicker",
+	"Description": "A handy module that stores the colors needed for UI and effects together with their names, making them easy to retrieve.",
+	"Category": "UI",
+	"CreatedBy": "GoldFrosch",
+	"CreatedByURL": "https://github.com/goldfrosch",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "SavedColorPicker",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit",
+			"WhitelistPlatforms": [ "Win64", "Mac", "IOS", "Android" ]
+		},
+		{
+			"Name": "SavedColorPickerRuntime",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [ "Win64", "Mac", "IOS", "Android" ]
+		}
+	]
+}
