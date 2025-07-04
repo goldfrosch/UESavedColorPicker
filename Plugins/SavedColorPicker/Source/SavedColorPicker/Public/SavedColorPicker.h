@@ -9,4 +9,5 @@ public:
 	virtual void ShutdownModule() override;
 
 	FName PropertyEditor;
+	FName SlateColor;
 };
