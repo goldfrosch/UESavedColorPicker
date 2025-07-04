@@ -11,6 +11,7 @@ void FSavedColorPickerModule::StartupModule()
 
 void FSavedColorPickerModule::ShutdownModule()
 {
+	FSavedColorPickerEditorOption::Get()->UnregisterEditorOptions();
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -9,8 +9,12 @@ public:
 
 	void RegisterEditorOptions();
 
+	void UnregisterEditorOptions();
+
 private:
 	static TUniquePtr<FSavedColorPickerEditorOption> This;
+
+	TSharedPtr<FExtender> LevelEditorExtender;
 
 #pragma region Editor
 	void AddCustomMenuEntry(FMenuBuilder& MenuBuilder);

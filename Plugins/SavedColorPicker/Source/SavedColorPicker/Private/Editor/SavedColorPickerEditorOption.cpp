@@ -22,17 +22,35 @@ void FSavedColorPickerEditorOption::RegisterEditorOptions()
 	FLevelEditorModule& EditModule = FModuleManager::LoadModuleChecked<
 		FLevelEditorModule>("LevelEditor");
 
-	const TSharedRef<FExtender> Extender = MakeShared<FExtender>();
+	LevelEditorExtender = MakeShared<FExtender>();
 
-	Extender->AddMenuExtension("ProjectSettingsMenu", EExtensionHook::After
-								, nullptr
-								, FMenuExtensionDelegate::CreateRaw(
-									this
-									, &
-									FSavedColorPickerEditorOption::AddCustomMenuEntry));
+	LevelEditorExtender->AddMenuExtension("ProjectSettingsMenu"
+										, EExtensionHook::After, nullptr
+										, FMenuExtensionDelegate::CreateRaw(
+											this
+											, &
+											FSavedColorPickerEditorOption::AddCustomMenuEntry));
 
-	EditModule.GetMenuExtensibilityManager()->AddExtender(Extender);
+	EditModule.GetMenuExtensibilityManager()->AddExtender(LevelEditorExtender);
 	RegisterOptionsNomadTab();
+}
+
+void FSavedColorPickerEditorOption::UnregisterEditorOptions()
+{
+	if (!LevelEditorExtender.IsValid())
+	{
+		return;
+	}
+
+	if (FModuleManager::Get().IsModuleLoaded("LevelEditor"))
+	{
+		FLevelEditorModule& LevelEditorModule = FModuleManager::GetModuleChecked
+			<FLevelEditorModule>("LevelEditor");
+
+		LevelEditorModule.GetMenuExtensibilityManager()->RemoveExtender(
+			LevelEditorExtender);
+	}
+	LevelEditorExtender.Reset();
 }
 
 void FSavedColorPickerEditorOption::AddCustomMenuEntry(
