@@ -44,6 +44,7 @@ void FSavedColorPickerEditorOption::UnregisterEditorOptions()
 
 	if (FModuleManager::Get().IsModuleLoaded("LevelEditor"))
 	{
+		// TODO: NPE 발생
 		FLevelEditorModule& LevelEditorModule = FModuleManager::GetModuleChecked
 			<FLevelEditorModule>("LevelEditor");
 
