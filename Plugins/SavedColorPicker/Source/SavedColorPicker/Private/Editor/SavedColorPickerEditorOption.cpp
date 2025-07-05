@@ -1,6 +1,6 @@
 ﻿#include "Editor/SavedColorPickerEditorOption.h"
-#include "ContentBrowserModule.h"
 #include "LevelEditor.h"
+#include "Editor/Slate/SColorPickerEditorOptionsTab.h"
 
 #define LOCTEXT_NAMESPACE "FSavedColorPickerModule"
 
@@ -87,9 +87,12 @@ void FSavedColorPickerEditorOption::RegisterOptionsNomadTab()
 
 TSharedRef<SDockTab>
 FSavedColorPickerEditorOption::OnRegisterSavedColorPickerOptionTab(
-	const FSpawnTabArgs&)
+	const FSpawnTabArgs& SpawnTabArgs)
 {
-	return SNew(SDockTab).TabRole(NomadTab);
+	return SNew(SDockTab).TabRole(NomadTab)
+		[
+			SNew(SColorPickerEditorOptionsTab).Test(TEXT("테스트 값"))
+		];
 }
 
 #undef LOCTEXT_NAMESPACE

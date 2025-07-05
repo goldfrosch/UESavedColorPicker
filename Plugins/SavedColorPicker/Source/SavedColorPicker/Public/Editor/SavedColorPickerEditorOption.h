@@ -26,6 +26,6 @@ private:
 	void RegisterOptionsNomadTab();
 
 	TSharedRef<SDockTab> OnRegisterSavedColorPickerOptionTab(
-		const FSpawnTabArgs&);
+		const FSpawnTabArgs& SpawnTabArgs);
 #pragma endregion
 };
