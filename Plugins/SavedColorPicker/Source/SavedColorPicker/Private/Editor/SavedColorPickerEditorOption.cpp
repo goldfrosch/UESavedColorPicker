@@ -1,6 +1,7 @@
 ﻿#include "Editor/SavedColorPickerEditorOption.h"
 #include "LevelEditor.h"
 #include "Editor/Slate/SColorPickerEditorOptionsTab.h"
+#include "SavedColorPicker/SavedColorPickerConstants.h"
 
 #define LOCTEXT_NAMESPACE "FSavedColorPickerModule"
 
@@ -69,13 +70,14 @@ void FSavedColorPickerEditorOption::AddCustomMenuEntry(
 void FSavedColorPickerEditorOption::OnSavedColorPickerOptionClicked() const
 {
 	FGlobalTabmanager::Get()->TryInvokeTab(
-		FName("SavedColorPickerEditorOptions"));
+		FName(SavedColorPickerConstants::EditorOptionsSlateKey));
 }
 
 void FSavedColorPickerEditorOption::RegisterOptionsNomadTab()
 {
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(
-								FName("SavedColorPickerEditorOptions")
+								FName(
+									SavedColorPickerConstants::EditorOptionsSlateKey)
 								, FOnSpawnTab::CreateRaw(
 									this
 									, &

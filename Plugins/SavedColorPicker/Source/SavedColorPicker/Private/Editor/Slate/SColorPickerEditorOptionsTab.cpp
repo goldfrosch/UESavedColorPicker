@@ -1,5 +1,7 @@
 ﻿#include "Editor/Slate/SColorPickerEditorOptionsTab.h"
 
+#include "Editor/Slate/SColorPickerEditorInput.h"
+
 void SColorPickerEditorOptionsTab::Construct(const FArguments& InArgs)
 {
 	bCanSupportFocus = true;
@@ -21,11 +23,7 @@ void SColorPickerEditorOptionsTab::Construct(const FArguments& InArgs)
 		]
 		+ SVerticalBox::Slot().AutoHeight()
 		[
-			SNew(STextBlock)
-			.Text(FText::FromString(InArgs._Test))
-			.Font(TitleTextFontInfo)
-			.Justification(ETextJustify::Center)
-			.ColorAndOpacity(FColor::White)
+			SNew(SColorPickerEditorInput)
 		]
 	];
 }
