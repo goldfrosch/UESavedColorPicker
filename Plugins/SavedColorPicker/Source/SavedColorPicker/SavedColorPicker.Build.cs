@@ -13,8 +13,6 @@ public class SavedColorPicker : ModuleRules
 			{
 				"Core",
 				"Slate",
-				"DetailCustomizations",
-				"PropertyEditor",
 				"AppFramework"
 			}
 		);
@@ -25,7 +23,9 @@ public class SavedColorPicker : ModuleRules
 			{
 				"CoreUObject",
 				"Engine",
-				"SlateCore"
+				"SlateCore",
+				"DetailCustomizations",
+				"PropertyEditor", "Projects", "Json", "JsonUtilities"
 			}
 		);
 	}
