@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "SavedOptionsData.h"
+#include "SavedColorPicker/SavedColorPickerConstants.h"
 
 class SAVEDCOLORPICKER_API FSavedColorPickerConfigManager
 {
@@ -21,5 +22,5 @@ private:
 
 	const FString FilePath = FString::Printf(
 		TEXT("%s%s"), *FPaths::ProjectDir()
-		, TEXT("/Plugins/SavedColorPicker/config.json"));
+		, SavedColorPickerConstants::PluginConfigurationPath);
 };

@@ -31,8 +31,8 @@ void FSavedColorPickerConfigManager::RegisterConfiguration()
 	{
 		UE_LOG(LogTemp, Error
 				, TEXT(
-					"Cannot Read Configuration File..., Plz Check Configuration File: [ Path: %s ]"
-				), *FilePath);
+					"%sCannot Read Configuration File..., Plz Check Configuration File: [ Path: %s ]"
+				), SavedColorPickerConstants::LogPrefix, *FilePath);
 	}
 
 	// Json Convert 실패의 케이스
@@ -42,13 +42,13 @@ void FSavedColorPickerConfigManager::RegisterConfiguration()
 	{
 		UE_LOG(LogTemp, Error
 				, TEXT(
-					"Your Configuration File is broken, So Create New Configuration Options"
-				));
+					"%sYour Configuration File is broken, So Create New Configuration Options"
+				), SavedColorPickerConstants::LogPrefix);
 		InitializeConfigData_Internal();
 	}
 
 	const FString CurrentPluginVersion = IPluginManager::Get().FindPlugin(
-		"SavedColorPicker")->GetDescriptor().VersionName;
+		SavedColorPickerConstants::PluginName)->GetDescriptor().VersionName;
 	// Configuration 파일의 버전이 현재 버전과 일치하지 않는 경우
 	if (LoadData.GetVersion() != CurrentPluginVersion)
 	{
@@ -56,8 +56,9 @@ void FSavedColorPickerConfigManager::RegisterConfiguration()
 		// 현재는 기본 값으로 처리한다.
 		UE_LOG(LogTemp, Warning
 				, TEXT(
-					"Your Configuration File Version Is Old, So Upgrade Myself..., [ Prev Version: %s, Current Version: %s ]"
-				), *LoadData.GetVersion(), *CurrentPluginVersion);
+					"%sYour Configuration File Version Is Old, So Upgrade Myself..., [ Prev Version: %s, Current Version: %s ]"
+				), SavedColorPickerConstants::LogPrefix, *LoadData.GetVersion()
+				, *CurrentPluginVersion);
 	}
 }
 
@@ -71,6 +72,6 @@ void FSavedColorPickerConfigManager::InitializeConfigData_Internal()
 
 	UE_LOG(LogTemp, Display
 			, TEXT(
-				"Create SavedColorPicker Configuration File! [ Version: %s ]" )
-			, *LoadData.GetVersion());
+				"%sCreate SavedColorPicker Configuration File! [ Version: %s ]"
+			), SavedColorPickerConstants::LogPrefix, *LoadData.GetVersion());
 }

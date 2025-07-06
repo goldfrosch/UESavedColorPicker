@@ -2,7 +2,37 @@
 
 #include "CoreMinimal.h"
 #include "Interfaces/IPluginManager.h"
+#include "SavedColorPicker/SavedColorPickerConstants.h"
 #include "SavedOptionsData.generated.h"
+
+USTRUCT()
+struct SAVEDCOLORPICKER_API FSavedColorTreeNode
+{
+	GENERATED_USTRUCT_BODY()
+
+	FString GetCategoryName() const { return CategoryName; }
+
+	void SetCategoryName(const FString& NewCategoryName)
+	{
+		CategoryName = NewCategoryName;
+	}
+
+	FLinearColor GetColorValue() const { return ColorValue; }
+
+	void SetColorValue(const FLinearColor& NewColorValue)
+	{
+		ColorValue = NewColorValue;
+	}
+
+private:
+	UPROPERTY()
+	FString CategoryName;
+
+	UPROPERTY()
+	FLinearColor ColorValue = FLinearColor();
+
+	TMap<FString, FSavedColorTreeNode*> ChildNodes;
+};
 
 USTRUCT()
 struct SAVEDCOLORPICKER_API FSaveJsonOptionsData
@@ -12,7 +42,7 @@ struct SAVEDCOLORPICKER_API FSaveJsonOptionsData
 	FSaveJsonOptionsData()
 	{
 		if (const TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin(
-			"SavedColorPicker"))
+			SavedColorPickerConstants::PluginName))
 		{
 			Version = Plugin->GetDescriptor().VersionName;
 			return;
@@ -22,14 +52,14 @@ struct SAVEDCOLORPICKER_API FSaveJsonOptionsData
 	}
 
 	FString& GetVersion() { return Version; }
+	TArray<FSavedColorTreeNode>& GetSavedColorList() { return SavedColorList; }
 
 private:
 	UPROPERTY()
 	FString Version;
-};
 
-USTRUCT()
-struct SAVEDCOLORPICKER_API FSaveJsonOptionsDataV1 : public FSaveJsonOptionsData
-{
-	GENERATED_USTRUCT_BODY()
+	UPROPERTY()
+	TArray<FSavedColorTreeNode> SavedColorList;
+
+	TMap<FString, FSavedColorTreeNode*> SavedColorTree;
 };
