@@ -35,5 +35,5 @@ private:
 	void HandleTextChanged(const FText& NewText);
 	void HandleTextCommitted(const FText& Text, ETextCommit::Type CommitType);
 
-	bool AddCategoryTitle_Internal(const FText& TextValue);
+	bool AddCategoryTitle_Internal(const FString& TextValue);
 };
